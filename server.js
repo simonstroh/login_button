@@ -27,7 +27,7 @@ app.get('/users', function(req, res) {
   })
 })
 app.get('/favicon.ico', function(req, res) {
-  res.sendFile(__dirname, '/1397485569_00001_icosahedron.obj.png')
+  res.sendFile('./1397485569_00001_icosahedron.obj.png')
 })
 app.post('/users', function(req, res) {
   console.log("Serving request type POST for url", req.url)
