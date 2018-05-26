@@ -78,8 +78,6 @@ class RegisterForm extends React.Component {
       },
       body: JSON.stringify(json)
     })
-    e.target.style.display = 'none'
-    this.props.showNext()
   }
   handleFirstName(e) {
     this.setState({firstname: e.target.value})
@@ -130,7 +128,6 @@ class App extends React.Component {
     this.beginLogin = this.beginLogin.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.next = this.next.bind(this)
-    this.next2 = this.next2.bind(this)
     this.previous = this.previous.bind(this)
   }
   beginLogin() {
@@ -142,9 +139,6 @@ class App extends React.Component {
   next() {
     this.setState({loginFormStyles: {display: 'none'}})
     this.setState({registerFormStyles: {display: 'block'}})
-  }
-  next2() {
-
   }
   previous(e) {
     e.preventDefault()
@@ -160,7 +154,7 @@ class App extends React.Component {
           <span>Account</span>
           <h5>enter your account information or register here</h5>
           <LoginForm closeModal={this.closeModal} showNext={this.next} styles={this.state.loginFormStyles}/>
-          <RegisterForm showNext={this.next2} showPrevious={this.previous} styles={this.state.registerFormStyles} />
+          <RegisterForm showPrevious={this.previous} styles={this.state.registerFormStyles} />
         </div>
       </div>
     )
