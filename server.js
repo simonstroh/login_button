@@ -19,11 +19,15 @@ app.use(parser.json())
 app.use(express.static('./public'))
 app.get('/users', function(req, res) {
   console.log("Serving request type GET")
+  console.log('Request from:', __dirname)
   var stringified
   User.find({}, function(error, users) {
     if (error) console.log(error)
     res.end(JSON.stringify(users))
   })
+})
+app.get('/favicon.ico', function(req, res) {
+  res.sendFile('./1397485569_00001_icosahedron.obj.png')
 })
 app.post('/users', function(req, res) {
   console.log("Serving request type POST for url", req.url)
