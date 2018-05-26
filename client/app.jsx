@@ -70,7 +70,6 @@ class RegisterForm extends React.Component {
       email: this.state.email,
       password: this.state.password
     }
-    console.log(json)
     fetch('/users', {
       method: 'POST',
       headers: {
