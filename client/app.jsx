@@ -116,7 +116,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       styles: {
-        left: '-999px'
+        left: '-1299px'
       },
       registerFormStyles: {
         display: 'none'
