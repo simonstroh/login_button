@@ -26,9 +26,6 @@ app.get('/users', function(req, res) {
     res.end(JSON.stringify(users))
   })
 })
-app.get('/favicon.ico', function(req, res) {
-  res.sendFile('./1397485569_00001_icosahedron.obj.png')
-})
 app.post('/users', function(req, res) {
   console.log("Serving request type POST for url", req.url)
   console.log("Object being sent is a(n)", typeof req.body)

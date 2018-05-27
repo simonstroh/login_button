@@ -14,6 +14,7 @@ class LoginForm extends React.Component {
     var email = this.state.email
     var password = this.state.password
     var closeModal = this.props.closeModal
+    var renderSuccess = this.props.renderSuccess
     fetch('/users').then(function(response) {
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -21,7 +22,10 @@ class LoginForm extends React.Component {
       }
       response.json().then(body => body.forEach(item => {
         if (item.password === password && item.email === email) {
-          closeModal()
+          renderSuccess()
+          document.getElementById('description').remove()
+          document.getElementById('button1').remove()
+          document.getElementById('button2').remove()
         }
       }))
     })
@@ -43,9 +47,9 @@ class LoginForm extends React.Component {
           <input type="submit" />
         </form>
         <br />
-        <p>If you haven't already created an account, register below:</p>
-        <button onClick={this.props.showNext}>Register</button>
-        <button onClick={this.props.closeModal}>Return</button>
+        <p id="description">If you haven't already created an account, register below:</p>
+        <button id="button1" onClick={this.props.showNext}>Register</button>
+        <button id="button2" onClick={this.props.closeModal}>Return</button>
       </div>
     )
   }
@@ -122,15 +126,22 @@ class App extends React.Component {
       },
       loginFormStyles: {
         display: 'block'
+      },
+      checkmarkStyles: {
+        display: 'none'
       }
     }
     this.beginLogin = this.beginLogin.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.next = this.next.bind(this)
     this.previous = this.previous.bind(this)
+    this.renderCheckMark = this.renderCheckMark.bind(this)
   }
   beginLogin() {
     this.setState({styles: {left: '0', height: 'auto'}})
+  }
+  renderCheckMark() {
+    this.setState({checkmarkStyles: {display: 'block'}})
   }
   closeModal() {
     this.setState({styles: {display: 'none'}})
@@ -149,10 +160,11 @@ class App extends React.Component {
       <div>
         <input onClick={this.beginLogin} type="submit" value="Account" />
         <div className="grit" id="pop-up" style={this.state.styles}>
+          <svg style={this.state.checkmarkStyles} className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path className="checkmark__check" stroke="#18af09" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
           <span onClick={this.closeModal} id="close-pop-up">&#10005;</span>
           <span>Account</span>
           <h5>enter your account information or register here</h5>
-          <LoginForm closeModal={this.closeModal} showNext={this.next} styles={this.state.loginFormStyles}/>
+          <LoginForm renderSuccess={this.renderCheckMark} closeModal={this.closeModal} showNext={this.next} styles={this.state.loginFormStyles}/>
           <RegisterForm showPrevious={this.previous} styles={this.state.registerFormStyles} />
         </div>
       </div>
