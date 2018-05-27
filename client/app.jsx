@@ -96,7 +96,7 @@ class RegisterForm extends React.Component {
   }
   render() {
     return (
-      <form style={this.props.styles} onSubmit={this.handleSubmit}>
+      <form id="register" style={this.props.styles} onSubmit={this.handleSubmit}>
         <button onClick={this.props.showPrevious}>Back to Login</button>
         <h5></h5>
         <p>Thank you for creating an account with us, please enter your name and email address and create a password.</p>
